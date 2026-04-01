@@ -1,0 +1,8 @@
+Flask==3.0.3
+python-docx==1.1.2
+jieba==0.42.1
+pypinyin==0.53.0
+pycorrector==1.0.0
+openpyxl==3.1.5
+chardet==5.2.0
+Werkzeug==3.0.4

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>公文校验工具</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 头部 -->
+        <header class="app-header">
+            <h1>公文校验工具</h1>
+            <p class="subtitle">错别字检测 &middot; 格式规范检查 &middot; 离线运行</p>
+        </header>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <!-- 左侧：输入区 -->
+            <section class="input-section">
+                <div class="section-header">
+                    <h2>文档输入</h2>
+                    <div class="input-tabs">
+                        <button class="tab-btn active" data-tab="text">粘贴文本</button>
+                        <button class="tab-btn" data-tab="file">上传文件</button>
+                    </div>
+                </div>
+
+                <!-- 文本输入 -->
+                <div class="tab-content active" id="tab-text">
+                    <textarea id="text-input" placeholder="请将公文内容粘贴到此处...
+
+示例：
+国务院办公厅关于印发XX方案的通知
+国办发〔2025〕1号
+
+各省、自治区、直辖市人民政府，国务院各部委、各直属机构：
+　　经国务院同意，现将《XX方案》印发给你们，请认真贯彻落实。
+
+国务院办公厅
+二〇二五年一月一日"></textarea>
+                    <div class="text-stats">
+                        <span id="char-count">0 字</span>
+                    </div>
+                </div>
+
+                <!-- 文件上传 -->
+                <div class="tab-content" id="tab-file">
+                    <div class="upload-area" id="upload-area">
+                        <div class="upload-icon">&#128196;</div>
+                        <p>点击选择文件或将文件拖拽到此处</p>
+                        <p class="upload-hint">支持 .txt / .docx 格式，最大 16MB</p>
+                        <input type="file" id="file-input" accept=".txt,.docx" hidden>
+                    </div>
+                    <div class="file-info" id="file-info" style="display:none;">
+                        <span class="file-name" id="file-name"></span>
+                        <button class="btn-remove" id="btn-remove-file" title="移除文件">&times;</button>
+                    </div>
+                </div>
+
+                <button class="btn-check" id="btn-check">
+                    <span class="btn-text">开始校验</span>
+                    <span class="btn-loading" style="display:none;">校验中...</span>
+                </button>
+            </section>
+
+            <!-- 右侧：结果区 -->
+            <section class="result-section" id="result-section">
+                <div class="empty-state" id="empty-state">
+                    <div class="empty-icon">&#128269;</div>
+                    <p>请输入公文内容或上传文件后点击"开始校验"</p>
+                </div>
+
+                <!-- 结果概览 -->
+                <div class="result-overview" id="result-overview" style="display:none;">
+                    <div class="score-card">
+                        <div class="score-circle" id="score-circle">
+                            <span class="score-value" id="score-value">--</span>
+                            <span class="score-label">分</span>
+                        </div>
+                        <div class="score-grade" id="score-grade">--</div>
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-item stat-error">
+                            <span class="stat-num" id="stat-errors">0</span>
+                            <span class="stat-label">错误</span>
+                        </div>
+                        <div class="stat-item stat-warning">
+                            <span class="stat-num" id="stat-warnings">0</span>
+                            <span class="stat-label">警告</span>
+                        </div>
+                        <div class="stat-item stat-info">
+                            <span class="stat-num" id="stat-info">0</span>
+                            <span class="stat-label">建议</span>
+                        </div>
+                        <div class="stat-item stat-total">
+                            <span class="stat-num" id="stat-total">0</span>
+                            <span class="stat-label">总计</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 结果筛选 -->
+                <div class="result-filters" id="result-filters" style="display:none;">
+                    <button class="filter-btn active" data-filter="all">全部</button>
+                    <button class="filter-btn" data-filter="typo">错别字</button>
+                    <button class="filter-btn" data-filter="format">格式</button>
+                    <button class="filter-btn" data-filter="error">仅错误</button>
+                    <button class="filter-btn" data-filter="warning">仅警告</button>
+                </div>
+
+                <!-- 结果列表 -->
+                <div class="result-list" id="result-list"></div>
+            </section>
+        </main>
+
+        <!-- 底部 -->
+        <footer class="app-footer">
+            <p>公文校验工具 v1.0 &middot; 完全离线运行 &middot; 基于 GB/T 9704-2012 标准</p>
+        </footer>
+    </div>
+
+    <script src="/static/js/main.js"></script>
+</body>
+</html>
